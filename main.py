@@ -1,6 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from dotenv import load_dotenv
+
+from app.internal import DatabaseConfig
+
+
+load_dotenv()
+
+database_config = DatabaseConfig()
+database_config.connect_database()
+
 tags_metadata = [{
     "name": "User",
     "description": "Manage user database operations"
