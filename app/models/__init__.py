@@ -1,3 +1,3 @@
 
-from payment_information import PaymentInformation
-from user import User
+from .payment_information import PaymentInformation
+from .user import User
