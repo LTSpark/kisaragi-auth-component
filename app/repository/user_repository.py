@@ -1,5 +1,4 @@
 from datetime import datetime
-from fastapi import HTTPException
 
 from app.models import User
 from app.schemas import CreateUser
