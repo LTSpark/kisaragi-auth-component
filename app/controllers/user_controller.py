@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Response
+from typing import Optional
+
+from fastapi import APIRouter, Response, File, UploadFile, Form
 
 from app.service import UserService
 from app.schemas import CreateUser, User, LoginUser
@@ -13,6 +15,23 @@ async def create_user(user: CreateUser, response: Response):
     return user_service.create_user(user)
 
 
+@user_router.put("/api/v1/users/{user_id}", response_model=User)
+async def update_user(
+        user_id: str,
+        name: Optional[str] = Form(None),
+        surname: Optional[str] = Form(None),
+        password: Optional[str] = Form(None),
+        file: Optional[UploadFile] = File(...)
+):
+    file_read = await file.read()
+    return user_service.update(user_id, name, surname, file_read, password)
+
+
 @user_router.get("/api/v1/users/{email}/email", response_model=User)
 async def get_user_by_email(email: str):
     return user_service.get_user_by_email(email)
+
+
+@user_router.get("/api/v1/users/{user_id}/id", response_model=User)
+async def get_user_by_id(user_id: str):
+    return user_service.get_user_by_id(user_id)
