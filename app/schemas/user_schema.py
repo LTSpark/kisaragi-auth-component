@@ -52,6 +52,10 @@ class CreateUser(BaseModel):
     role: str
 
 
+class RequestLoginUser(BaseModel):
+    email: str
+    password: str
+
 class LoginUser(BaseModel):
     user: User
     token: str
