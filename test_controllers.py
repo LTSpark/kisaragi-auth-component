@@ -1,5 +1,9 @@
 from fastapi.testclient import TestClient
+
 from main import app
+from app.internal import DatabaseConfig
+
+DatabaseConfig().connect_database()
 
 client = TestClient(app)
 
@@ -22,7 +26,10 @@ def test_create_user():
 
 def test_create_user_fail():
     response = client.post(
-        "/api/v1/users"
+        "/api/v1/users",
+        json={
+            "hola": "adios"
+        }
     )
     assert response.status_code == 422
 
