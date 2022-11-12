@@ -6,6 +6,9 @@ from fastapi.security import HTTPBasicCredentials, HTTPBearer
 
 from app.schemas import TokenData
 
+from dotenv import load_dotenv
+load_dotenv()
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
