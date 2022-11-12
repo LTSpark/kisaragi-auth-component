@@ -8,13 +8,14 @@ from app.schemas import CreateUser
 class UserRepository:
 
     @staticmethod
-    def create_user(user: CreateUser):
-        User(
-            name=user.name,
+    def create_user(user: CreateUser) -> User:
+        return User(
+            user_name=user.user_name,
             email=user.email,
             password=user.password,
             telephone_number=user.telephone_number,
-            birth_date=user.birth_date
+            birth_date=user.birth_date,
+            role=user.role
         ).save()
 
     @staticmethod

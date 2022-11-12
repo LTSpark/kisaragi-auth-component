@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from app.internal import DatabaseConfig
-from app.controllers import user_router, health_router
+from app.controllers import user_router, health_router, auth_router
 
 load_dotenv()
 
@@ -17,7 +17,7 @@ tags_metadata = [
         "description": "Manage Users database operations.",
     },
     {
-        "name": "Auth",
+        "name": "Authentication",
         "description": "Manage authorization processes, supports traditional OAuth.",
     },
     {
@@ -48,3 +48,4 @@ app.add_middleware(
 
 app.include_router(health_router, tags=["Health"])
 app.include_router(user_router, tags=["Users"])
+app.include_router(auth_router, tags=["Authentication"])
