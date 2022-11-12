@@ -16,18 +16,21 @@ class PaymentInformation(BaseModel):
 
 class User(BaseModel):
     user_id: str
-    name: str
+    user_name: str
     email: str
+    role: str
     birth_date: date
     description: Optional[str] = None
     profile_image: Optional[str] = None
+    name: Optional[str] = None
+    surname: Optional[str] = None
     payment_information: Optional[List[PaymentInformation]] = None
     created_at: datetime
     updated_at: datetime
 
 
 class CreateUser(BaseModel):
-    name: str = Field(
+    user_name: str = Field(
         title="Username",
         max_length=25,
         min_length=6
@@ -46,3 +49,9 @@ class CreateUser(BaseModel):
         min_length=9,
         max_length=9
     )
+    role: str
+
+
+class LoginUser(BaseModel):
+    user: User
+    token: str

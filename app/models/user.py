@@ -1,17 +1,23 @@
+from enum import Enum
 from datetime import datetime
 from bson.objectid import ObjectId
 
-from mongoengine import Document, StringField, ObjectIdField, \
+from mongoengine import Document, StringField, ObjectIdField, EnumField, \
     EmailField, DateTimeField, EmbeddedDocumentListField, DateField
 
 from app.models import PaymentInformation
+
+
+class Role(Enum):
+    ADMIN='ADMIN'
+    USER='USER'
 
 
 class User(Document):
 
     _id = ObjectIdField(required=True, default=ObjectId)
 
-    name = StringField(unique=True, min_length=6, max_length=25, required=True)
+    user_name = StringField(unique=True, min_length=6, max_length=25, required=True)
     email = EmailField(unique=True, required=True)
     password = StringField(required=True)
 
@@ -19,19 +25,29 @@ class User(Document):
     profile_image = StringField(required=False)
     birth_date = DateField(required=True)
 
+    name = StringField()
+    surname = StringField()
+
+    role = EnumField(Role)
     payment_information = EmbeddedDocumentListField(PaymentInformation)
 
     created_at = DateTimeField(default=datetime.utcnow())
     updated_at = DateTimeField(default=datetime.utcnow())
 
+    def get_id(self):
+        return str(self._id)
+
     def to_dict(self):
         return {
             "user_id": str(self._id),
-            "name": self.name,
+            "user_name": self.user_name,
             "email": self.email,
             "birth_date": self.birth_date,
             "profile_image": self.profile_image,
+            "role": self.role.name,
             "telephone_number": self.telephone_number,
+            "name": self.name,
+            "surname": self.surname,
             "payment_information": list(map(
                 lambda payment_information: payment_information.to_dict(),
                 self.payment_information)
