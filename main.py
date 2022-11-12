@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from app.internal import DatabaseConfig
-from app.controllers import user_router
+from app.controllers import user_router, health_router
 
 load_dotenv()
 
@@ -23,6 +23,10 @@ tags_metadata = [
     {
         "name": "Payment Information",
         "description": "Manage Users Payment Information database operations."
+    },
+    {
+        "name": "Health",
+        "description": "Service to check health of Kisaragi Auth service"
     }
 ]
 
@@ -42,4 +46,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(health_router, tags=["Health"])
 app.include_router(user_router, tags=["Users"])
