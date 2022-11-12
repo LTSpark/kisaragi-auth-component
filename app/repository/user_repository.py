@@ -1,5 +1,4 @@
 from datetime import datetime
-from fastapi import HTTPException
 
 from app.models import User
 from app.schemas import CreateUser
@@ -20,11 +19,11 @@ class UserRepository:
 
     @staticmethod
     def get_user_by_id(user_id) -> User:
-        return User.objects(id=user_id).first()
+        return User.objects(_id=user_id).first()
 
     @staticmethod
     def get_user_by_name(user_name) -> User:
-        return User.objects(name=user_name).first()
+        return User.objects(user_name=user_name).first()
 
     @staticmethod
     def get_user_by_email(user_email) -> User:
@@ -35,10 +34,10 @@ class UserRepository:
         User.objects(id=user_id).first()
 
     @staticmethod
-    def update_user(user_id, name, description, password, profile_image):
-        User.objects(id=user_id).update(
+    def update_user(user_id, name, surname, password, profile_image):
+        User.objects(_id=user_id).update(
             set__name=name,
-            set__description=description,
+            set__surname=surname,
             set__password=password,
             set__profile_image=profile_image,
             set__updated_at=datetime.utcnow()
