@@ -4,26 +4,38 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from app.internal import DatabaseConfig
-
+from app.controllers import user_router, health_router, auth_router
 
 load_dotenv()
 
-database_config = DatabaseConfig()
-database_config.connect_database()
+DatabaseConfig().connect_database()
 
-tags_metadata = [{
-    "name": "User",
-    "description": "Manage user database operations"
-}, {
-    "name": "Auth",
-    "description": "Manage authorization processes"
-}]
+
+tags_metadata = [
+    {
+        "name": "Users",
+        "description": "Manage Users database operations.",
+    },
+    {
+        "name": "Authentication",
+        "description": "Manage authorization processes, supports traditional OAuth.",
+    },
+    {
+        "name": "Payment Information",
+        "description": "Manage Users Payment Information database operations."
+    },
+    {
+        "name": "Health",
+        "description": "Service to check health of Kisaragi Auth service"
+    }
+]
 
 app = FastAPI(
     title="Kisaragi Authentication Component",
-    description="REST API for managing user authorization and personal information",
     version="0.0.5",
-    open_api_tags=tags_metadata
+    description="REST API for managing users authorization and personal information.",
+    docs_url="/api/v1/documentation",
+    openapi_tags=tags_metadata
 )
 
 app.add_middleware(
@@ -33,3 +45,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(health_router, tags=["Health"])
+app.include_router(user_router, tags=["Users"])
+app.include_router(auth_router, tags=["Authentication"])

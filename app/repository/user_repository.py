@@ -1,31 +1,32 @@
 from datetime import datetime
 
 from app.models import User
+from app.schemas import CreateUser
 
 
 class UserRepository:
 
     @staticmethod
-    def create_user(name, email, password, description, birth_date):
-        new_user = User(
-            name=name,
-            email=email,
-            description=description,
-            password=password,
-            birth_date=birth_date
-        )
-        new_user.save()
+    def create_user(user: CreateUser) -> User:
+        return User(
+            user_name=user.user_name,
+            email=user.email,
+            password=user.password,
+            telephone_number=user.telephone_number,
+            birth_date=user.birth_date,
+            role=user.role
+        ).save()
 
     @staticmethod
-    def get_user_by_id(user_id):
-        return User.objects(id=user_id).first()
+    def get_user_by_id(user_id) -> User:
+        return User.objects(_id=user_id).first()
 
     @staticmethod
-    def get_user_by_name(user_name):
-        return User.objects(name=user_name).first()
+    def get_user_by_name(user_name) -> User:
+        return User.objects(user_name=user_name).first()
 
     @staticmethod
-    def get_user_by_email(user_email):
+    def get_user_by_email(user_email) -> User:
         return User.objects(email=user_email).first()
 
     @staticmethod
@@ -33,10 +34,10 @@ class UserRepository:
         User.objects(id=user_id).first()
 
     @staticmethod
-    def update_user(user_id, name, description, password, profile_image):
-        User.objects(id=user_id).update(
+    def update_user(user_id, name, surname, password, profile_image):
+        User.objects(_id=user_id).update(
             set__name=name,
-            set__description=description,
+            set__surname=surname,
             set__password=password,
             set__profile_image=profile_image,
             set__updated_at=datetime.utcnow()
