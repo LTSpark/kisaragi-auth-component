@@ -20,7 +20,6 @@ class User(BaseModel):
     email: str
     role: str
     birth_date: date
-    description: Optional[str] = None
     profile_image: Optional[str] = None
     name: Optional[str] = None
     surname: Optional[str] = None
