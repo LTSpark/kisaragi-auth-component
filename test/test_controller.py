@@ -7,6 +7,7 @@ DatabaseConfig().connect_database()
 
 client = TestClient(app)
 
+
 # USER CONTROLLER
 def test_create_user():
     response = client.post(
@@ -23,6 +24,7 @@ def test_create_user():
     assert response.status_code == 201
     assert "user" in response.json()
 
+
 def test_create_user_fail():
     response = client.post(
         "/api/v1/users",
@@ -31,7 +33,6 @@ def test_create_user_fail():
         }
     )
     assert response.status_code == 422
-
 
 
 def test_update_user_fail():
@@ -49,7 +50,6 @@ def test_update_user_fail():
     assert response.status_code == 422
 
 
-
 def test_get_user_by_email():
     email = "arian30@gmail.com"
     response = client.get(
@@ -58,13 +58,13 @@ def test_get_user_by_email():
     assert response.status_code == 200
     assert "user_id" in response.json()
 
+
 def test_get_user_by_email_fail():
     email = ""
     response = client.get(
         f"/api/v1/users/{email}/email"
     )
     assert response.status_code == 404
-
 
 
 def test_get_user_by_id():
@@ -76,12 +76,14 @@ def test_get_user_by_id():
     assert response.status_code == 200
     assert "user_id" in response.json()
 
+
 # HEALTH CONTROLLER
 def test_create_user_health():
     response = client.get(
         "/api/v1/health"
     )
     assert response.json() == {"msg": "Everything is OK!", "status": "Healthy"}
+
 
 # AUTHENTICATION CONTROLLER
 def test_login_user():
@@ -95,6 +97,7 @@ def test_login_user():
     assert response.status_code == 200
     assert "user" in response.json()
 
+
 def test_login_user_fail1():
     response = client.post(
         "/api/v1/auth",
@@ -104,6 +107,7 @@ def test_login_user_fail1():
         }
     )
     assert response.status_code == 404
+
 
 def test_login_user_fail2():
     response = client.post(
