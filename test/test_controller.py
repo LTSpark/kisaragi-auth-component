@@ -7,7 +7,6 @@ DatabaseConfig().connect_database()
 
 client = TestClient(app)
 
-
 # USER CONTROLLER
 def test_create_user():
     response = client.post(
@@ -36,13 +35,13 @@ def test_create_user_fail():
 
 
 def test_update_user_fail():
-    user_id = '638b20a51795649a3484e7c7'
+    user_id = '636f2fae4e24474ddc245214'
     files=dict(foo='bar')
     
     response = client.put(
         f"/api/v1/users/{user_id}",
         json={
-            "user_id": "638b20a51795649a3484e7c7",
+            "user_id": "636f2fae4e24474ddc245214",
             "name": "Arian Z.",
             "file":files
         }, files=dict(foo='bar')
@@ -51,7 +50,7 @@ def test_update_user_fail():
 
 
 def test_get_user_by_email():
-    email = "edward.ramos30@gmail.com"
+    email = "arian@gmail.com"
     response = client.get(
         f"/api/v1/users/{email}/email"
     )
@@ -68,7 +67,7 @@ def test_get_user_by_email_fail():
 
 
 def test_get_user_by_id():
-    user_id = '638b20a51795649a3484e7c7'
+    user_id = '636f2fae4e24474ddc245214'
     
     response = client.get(
         f"/api/v1/users/{user_id}/id"
@@ -106,8 +105,8 @@ def test_login_user():
     response = client.post(
         "/api/v1/auth",
         json={
-            'email': "edward.ramos30@gmail.com",
-            'password': "Edward123"
+            'email': "arian@gmail.com",
+            'password': "Hola12345"
         }
     )
     assert response.status_code == 200
