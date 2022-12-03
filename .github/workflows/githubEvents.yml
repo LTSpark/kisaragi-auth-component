@@ -1,7 +1,10 @@
 name: Python package
 
 on: [push]
-
+env:
+  ALGORITHM: HS256
+  MONGODB_URI: mongodb://127.0.0.1:27017/kisaragi-auth
+  SECRET_KEY: hola
 jobs:
   build:
 
