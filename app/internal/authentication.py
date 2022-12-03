@@ -2,7 +2,7 @@ import os
 
 from jose import JWTError, jwt
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBasicCredentials, HTTPBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from app.schemas import TokenData
 
@@ -25,7 +25,7 @@ def encode_token(payload):
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
 
-async def get_token_payload(credentials: HTTPBasicCredentials = Depends(security)):
+async def get_token_payload(credentials: HTTPAuthorizationCredentials = Depends(security)):
 
     token = credentials.credentials
 

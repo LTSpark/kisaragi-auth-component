@@ -1,10 +1,24 @@
-import unittest
+from fastapi.testclient import TestClient
+
+from main import app
+from app.internal import DatabaseConfig
+
+from app.internal import authentication
+from fastapi import Depends
+from fastapi.security import HTTPBearer
+from app.internal.logger import Logger
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+DatabaseConfig().connect_database()
+
+client = TestClient(app)
+
+def test_get_token_payload():
+    security = HTTPBearer()
+    response = authentication.get_token_payload(Depends(security))
+    print(response)
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_error():
+    myLogger = Logger(__name__)
+    myLogger.error(data={'message':'error test'})
