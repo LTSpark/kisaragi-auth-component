@@ -9,8 +9,8 @@ from app.models import PaymentInformation
 
 
 class Role(Enum):
-    ADMIN='ADMIN'
-    USER='USER'
+    ADMIN = 'ADMIN'
+    USER = 'USER'
 
 
 class User(Document):
