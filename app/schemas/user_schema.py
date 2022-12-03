@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Union, Optional, List
+from typing import Optional, List
 
 from pydantic import BaseModel, Field
 
@@ -54,6 +54,7 @@ class CreateUser(BaseModel):
 class RequestLoginUser(BaseModel):
     email: str
     password: str
+
 
 class LoginUser(BaseModel):
     user: User
