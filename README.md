@@ -17,7 +17,9 @@ $ source <venv>/bin/activate
 ```sh
 pip install -r requirement.txt
 ```
-### 3. Execute UVICORN
+### 3. Obtain the .env file
+For more info read [.env.example](./env.example)
+### 4. Execute UVICORN
 ```sh
 uvicorn --port 5000 --host 127.0.0.1 main:app --reload --log-config log.ini
 ```
