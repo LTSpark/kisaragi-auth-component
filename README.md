@@ -2,7 +2,11 @@
 REST API for authorization on Kisaragi project
 
 ## Run the project
-### 1. Activate the VENV
+### 1. Create Python Virtual Environment
+```sh
+python3 -m venv venv
+```
+### 2. Activate the VENV
 Powershell:
 ```sh
 ./venv/Scripts/Activate.ps1
@@ -13,13 +17,13 @@ CMD:
 Bash:
 $ source <venv>/bin/activate
 ```
-### 2. Install Requirements
+### 3. Install Requirements
 ```sh
 pip install -r requirement.txt
 ```
-### 3. Obtain the .env file
+### 4. Obtain the .env file
 For more info read [.env.example](./.env.example)
-### 4. Execute UVICORN
+### 5. Execute UVICORN
 ```sh
 uvicorn --port 5000 --host 127.0.0.1 main:app --reload --log-config log.ini
 ```
