@@ -49,6 +49,10 @@ class User(Document):
             "telephone_number": self.telephone_number,
             "name": self.name,
             "surname": self.surname,
+            "addresses": list(map(
+                lambda addresses: addresses.to_dict(),
+                self.addresses)
+            ),
             "payment_information": list(map(
                 lambda payment_information: payment_information.to_dict(),
                 self.payment_information)
