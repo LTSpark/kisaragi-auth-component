@@ -4,6 +4,16 @@ from typing import Optional, List
 from pydantic import BaseModel, Field
 
 
+class Address(BaseModel):
+    address_id: str
+    address: str
+    district: str
+    city: str
+    zipcode: str
+    created_at: datetime
+    updated_at: datetime
+
+
 class PaymentInformation(BaseModel):
     payment_information_id: str
     primary_account_number: str
@@ -24,6 +34,7 @@ class User(BaseModel):
     name: Optional[str] = None
     surname: Optional[str] = None
     payment_information: Optional[List[PaymentInformation]] = None
+    addresses: Optional[List[Address]] = None
     created_at: datetime
     updated_at: datetime
 

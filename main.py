@@ -10,7 +10,6 @@ load_dotenv()
 
 DatabaseConfig().connect_database()
 
-
 tags_metadata = [
     {
         "name": "Users",

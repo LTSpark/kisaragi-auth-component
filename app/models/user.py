@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from mongoengine import Document, StringField, ObjectIdField, EnumField, \
     EmailField, DateTimeField, EmbeddedDocumentListField, DateField
 
-from app.models import PaymentInformation
+from app.models import PaymentInformation, Address
 
 
 class Role(Enum):
@@ -29,6 +29,7 @@ class User(Document):
     surname = StringField()
 
     role = EnumField(Role)
+    addresses = EmbeddedDocumentListField(Address)
     payment_information = EmbeddedDocumentListField(PaymentInformation)
 
     created_at = DateTimeField(default=datetime.utcnow())
@@ -48,6 +49,10 @@ class User(Document):
             "telephone_number": self.telephone_number,
             "name": self.name,
             "surname": self.surname,
+            "addresses": list(map(
+                lambda addresses: addresses.to_dict(),
+                self.addresses)
+            ),
             "payment_information": list(map(
                 lambda payment_information: payment_information.to_dict(),
                 self.payment_information)
