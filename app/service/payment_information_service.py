@@ -17,7 +17,7 @@ class PaymentInformationService:
                 detail=f"User with id {user_id} not found"
             )
 
-        return self.payment_information_repository.add_payment_information_to_user(user, payment_information)
+        return self.payment_information_repository.add_payment_information_to_user(user, payment_information).to_dict()
 
     def delete_payment_information(self, user_id: str, payment_information_id: str):
         user = self.user_repository.get_user_by_id(user_id)
@@ -35,4 +35,4 @@ class PaymentInformationService:
             )
 
         payment_information = payment_information_list[0]
-        return self.payment_information_repository.remove_payment_information_from_user(user, payment_information)
+        return self.payment_information_repository.remove_payment_information_from_user(user, payment_information).to_dict()

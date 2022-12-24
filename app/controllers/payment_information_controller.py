@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Response
 
 from app.service import PaymentInformationService
-from app.schemas import PaymentInformation, User
+from app.schemas import CreatePaymentInformation, User
 
 payment_information_router = APIRouter()
 payment_information_service = PaymentInformationService()
 
 
 @payment_information_router.post("/api/v1/payment_information/{user_id}", response_model=User)
-async def create_payment_information(user_id: str, payment_information: PaymentInformation, response: Response):
+async def create_payment_information(user_id: str, payment_information: CreatePaymentInformation, response: Response):
     response.status_code = 201
     return payment_information_service.create_payment_information(user_id, payment_information)
 

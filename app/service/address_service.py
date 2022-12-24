@@ -17,7 +17,7 @@ class AddressService:
                 detail=f"User with id {user_id} not found"
             )
 
-        return self.address_repository.add_address_to_user(user, address)
+        return self.address_repository.add_address_to_user(user, address).to_dict()
 
     def delete_address(self, user_id: str, address_id: str):
         user = self.user_repository.get_user_by_id(user_id)
@@ -35,4 +35,4 @@ class AddressService:
             )
 
         address = address_list[0]
-        return self.address_repository.remove_address_from_user(user, address)
+        return self.address_repository.remove_address_from_user(user, address).to_dict()
