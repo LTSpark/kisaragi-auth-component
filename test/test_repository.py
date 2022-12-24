@@ -16,7 +16,7 @@ class RepositoryUnitTest(unittest.TestCase):
     def test_01_create_user(self):
         user = CreateUser(
             user_name="mock_user",
-            email="mock_user@test.com",
+            email="mock_user123@test.com",
             password="Test12345",
             telephone_number="123456789",
             birth_date=datetime.date.today(),

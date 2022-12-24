@@ -44,14 +44,14 @@ def test_update_user_fail():
         json={
             "user_id": "636f2fae4e24474ddc245214",
             "name": "Arian Z.",
-            "file":files
+            "file": files
         }, files=dict(foo='bar')
     )
     assert response.status_code == 422
 
 
 def test_get_user_by_email():
-    email = "arian@gmail.com"
+    email = "mock.user@gmail.com"
     response = client.get(
         f"/api/v1/users/{email}/email"
     )
@@ -60,7 +60,7 @@ def test_get_user_by_email():
 
 
 def test_get_user_by_email_fail():
-    email = ""
+    email = "arian@gmail.com"
     response = client.get(
         f"/api/v1/users/{email}/email"
     )
@@ -68,7 +68,10 @@ def test_get_user_by_email_fail():
 
 
 def test_get_user_by_id():
-    user_id = '636f2fae4e24474ddc245214'
+    email = "mock.user@gmail.com"
+    user_id = client.get(
+        f"/api/v1/users/{email}/email"
+    ).json()['user_id']
     
     response = client.get(
         f"/api/v1/users/{user_id}/id"
@@ -90,8 +93,8 @@ def test_login_user():
     response = client.post(
         "/api/v1/auth",
         json={
-            'email': "arian@gmail.com",
-            'password': "Hola12345"
+            'email': "mock.user@gmail.com",
+            'password': "MockUser123"
         }
     )
     assert response.status_code == 200
