@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from main import app
+from app import app
 from app.internal import DatabaseConfig
 
 DatabaseConfig().connect_database()
@@ -141,6 +141,32 @@ def test_add_remove_address():
 
     assert response.status_code == 200
     assert response.json()["addresses"] == []
+
+
+def test_add_remove_payment_information():
+    user_data = client.get(
+        f"/api/v1/users/mock.user@gmail.com/email"
+    ).json()
+
+    response = client.post(
+        f"/api/v1/payment_information/{user_data['user_id']}",
+        json={
+          "primary_account_number": "455713254235322",
+          "cardholder_name": "TestCard",
+          "expiration_date": "2022-12-24"
+        }
+    )
+
+    assert response.status_code == 201
+    assert len(response.json()["payment_information"]) == 1
+
+    payment_information_id = response.json()["payment_information"][0]["payment_information_id"]
+    response = client.delete(
+        f"/api/v1/payment_information/{user_data['user_id']}/id/{payment_information_id}"
+    )
+
+    assert response.status_code == 200
+    assert response.json()["payment_information"] == []
 
 
 def test_delete_user():

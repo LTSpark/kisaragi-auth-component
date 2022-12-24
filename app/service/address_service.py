@@ -11,7 +11,8 @@ class AddressService:
 
     def create_address(self, user_id: str, address: CreateAddress):
         user = self.user_repository.get_user_by_id(user_id)
-        if not user:
+        print(user)
+        if user is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"User with id {user_id} not found"
