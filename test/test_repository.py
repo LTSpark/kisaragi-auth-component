@@ -37,7 +37,7 @@ class RepositoryUnitTest(unittest.TestCase):
         self.assertEqual(user["user_name"], "mock_user")
 
     def test_04_get_user_by_email(self):
-        user = self.user_repository.get_user_by_email("mock_user@test.com").to_dict()
+        user = self.user_repository.get_user_by_email("mock_user123@test.com").to_dict()
         self.assertEqual(user["email"], "mock_user@test.com")
 
     def test_05_add_address(self):
