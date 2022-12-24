@@ -57,6 +57,9 @@ class UserService:
             )
         return user.to_dict()
 
+    def get_user_by_name(self, user_name):
+        return self.user_repository.get_users_by_name(user_name)
+
     def update(self, user_id, name, surname, file, password):
 
         user = self.user_repository.get_user_by_id(user_id)
@@ -84,6 +87,24 @@ class UserService:
         try:
             self.user_repository.update_user(user_id, name, surname, new_password, profile_image)
             return self.user_repository.get_user_by_id(user_id).to_dict()
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=e.__str__()
+            )
+
+    def delete(self, user_id):
+
+        user = self.user_repository.get_user_by_id(user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"User with id {user_id} not found"
+            )
+
+        try:
+            self.user_repository.delete_user(user_id)
+            return {'msg': 'User deleted successfully'}
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

@@ -1,7 +1,14 @@
+import re
+
+from dotenv import load_dotenv
 from datetime import datetime
 
 from app.models import User
 from app.schemas import CreateUser
+from app.internal import DatabaseConfig
+
+load_dotenv()
+DatabaseConfig().connect_database()
 
 
 class UserRepository:
@@ -22,8 +29,13 @@ class UserRepository:
         return User.objects(_id=user_id).first()
 
     @staticmethod
-    def get_user_by_name(user_name) -> User:
-        return User.objects(user_name=user_name).first()
+    def get_users_by_name(user_name) -> list[User]:
+        users = []
+        name_regex = re.compile(f'.*{user_name}*.', re.IGNORECASE)
+        user_objs = User.objects(user_name=name_regex)
+        for user_obj in user_objs:
+            users.append(user_obj.to_dict())
+        return users
 
     @staticmethod
     def get_user_by_email(user_email) -> User:
@@ -31,7 +43,7 @@ class UserRepository:
 
     @staticmethod
     def delete_user(user_id):
-        User.objects(id=user_id).first()
+        User.objects(_id=user_id).delete()
 
     @staticmethod
     def update_user(user_id, name, surname, password, profile_image):

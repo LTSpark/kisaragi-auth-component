@@ -35,3 +35,13 @@ async def get_user_by_email(email: str):
 @user_router.get("/api/v1/users/{user_id}/id", response_model=User)
 async def get_user_by_id(user_id: str):
     return user_service.get_user_by_id(user_id)
+
+
+@user_router.get("/api/v1/users/{user_name}/name", response_model=list[User])
+async def get_users_by_name(user_name: str):
+    return user_service.get_user_by_name(user_name)
+
+
+@user_router.delete("/api/v1/users/{user_id}/id")
+async def delete(user_id: str):
+    return user_service.delete(user_id)
