@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 
 from app.models import User, Address
 from app.internal import DatabaseConfig
-from app.schemas import Address as AddressSchema
+from app.schemas import CreateAddress
 
 load_dotenv()
 DatabaseConfig().connect_database()
@@ -11,7 +11,7 @@ DatabaseConfig().connect_database()
 class AddressRepository:
 
     @staticmethod
-    def add_address_to_user(user: User, address: AddressSchema) -> User:
+    def add_address_to_user(user: User, address: CreateAddress) -> User:
         address = Address(
             address=address.address,
             district=address.city,

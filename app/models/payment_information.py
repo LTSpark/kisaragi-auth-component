@@ -11,7 +11,7 @@ class PaymentInformation(EmbeddedDocument):
     cardholder_name = StringField(required=True)
     primary_account_number = StringField(required=True)
     expiration_date = DateField(required=True)
-    active = BooleanField(require=True)
+    active = BooleanField(default=True)
 
     created_at = DateTimeField(default=datetime.utcnow())
     updated_at = DateTimeField(default=datetime.utcnow())
