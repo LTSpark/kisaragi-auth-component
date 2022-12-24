@@ -29,13 +29,8 @@ class UserRepository:
         return User.objects(_id=user_id).first()
 
     @staticmethod
-    def get_users_by_name(user_name) -> list[User]:
-        users = []
-        name_regex = re.compile(f'.*{user_name}*.', re.IGNORECASE)
-        user_objs = User.objects(user_name=name_regex)
-        for user_obj in user_objs:
-            users.append(user_obj.to_dict())
-        return users
+    def get_user_by_name(user_name) -> User:
+        return User.objects(user_name=user_name).first()
 
     @staticmethod
     def get_user_by_email(user_email) -> User:

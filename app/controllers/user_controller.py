@@ -37,8 +37,8 @@ async def get_user_by_id(user_id: str):
     return user_service.get_user_by_id(user_id)
 
 
-@user_router.get("/api/v1/users/{user_name}/name", response_model=list[User])
-async def get_users_by_name(user_name: str):
+@user_router.get("/api/v1/users/{user_name}/name", response_model=User)
+async def get_user_by_name(user_name: str):
     return user_service.get_user_by_name(user_name)
 
 

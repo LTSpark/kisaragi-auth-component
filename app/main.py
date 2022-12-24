@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from dotenv import load_dotenv
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from .internal import DatabaseConfig
 from .controllers import user_router, health_router, auth_router, payment_information_router, address_router
@@ -55,3 +56,5 @@ app.include_router(user_router, tags=["Users"])
 app.include_router(auth_router, tags=["Authentication"])
 app.include_router(payment_information_router, tags=["Payment Information"])
 app.include_router(address_router, tags=["Address"])
+
+Instrumentator().instrument(app).expose(app)

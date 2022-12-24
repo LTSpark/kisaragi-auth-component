@@ -58,7 +58,7 @@ class UserService:
         return user.to_dict()
 
     def get_user_by_name(self, user_name):
-        return self.user_repository.get_users_by_name(user_name)
+        return self.user_repository.get_user_by_name(user_name)
 
     def update(self, user_id, name, surname, file, password):
 
