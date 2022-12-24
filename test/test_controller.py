@@ -7,6 +7,7 @@ DatabaseConfig().connect_database()
 
 client = TestClient(app)
 
+
 # USER CONTROLLER
 def test_create_user():
     response = client.post(
@@ -75,6 +76,7 @@ def test_get_user_by_id():
     assert response.status_code == 200
     assert "user_id" in response.json()
 
+
 # HEALTH CONTROLLER
 def test_create_user_health():
     response = client.get(
@@ -113,6 +115,34 @@ def test_login_user_fail2():
     )
     assert response.status_code == 422
 
+
+def test_add_remove_address():
+    user_data = client.get(
+        f"/api/v1/users/mock.user@gmail.com/email"
+    ).json()
+
+    response = client.post(
+        f"/api/v1/address/{user_data['user_id']}",
+        json={
+            "address": "Jr Prueba 231",
+            "city": "Prueba City",
+            "zipcode": "12345",
+            "district": "District Prueba"
+        }
+    )
+
+    assert response.status_code == 201
+    assert len(response.json()["addresses"]) == 1
+
+    address_id = response.json()["addresses"][0]["address_id"]
+    response = client.delete(
+        f"/api/v1/address/{user_data['user_id']}/id/{address_id}"
+    )
+
+    assert response.status_code == 200
+    assert response.json()["addresses"] == []
+
+
 def test_delete_user():
 
     email = "mock.user@gmail.com"
@@ -123,7 +153,10 @@ def test_delete_user():
     user_id = user_data['user_id']
 
     response = client.delete(
-        f"/api/v1/users/{user_id}/id",
+        f"/api/v1/users/{user_id}/id"
     )
+
     assert response.status_code == 200
     assert response.json() == {"msg": "User deleted successfully"}
+
+

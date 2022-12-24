@@ -35,7 +35,6 @@ class CreatePaymentInformation(BaseModel):
     primary_account_number: str
     cardholder_name: str
     expiration_date: date
-    active: bool
 
 
 class User(BaseModel):

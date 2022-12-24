@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-from app.schemas import Address
+from app.schemas import CreateAddress
 from app.repository import UserRepository, AddressRepository
 
 
@@ -9,7 +9,7 @@ class AddressService:
     user_repository = UserRepository
     address_repository = AddressRepository
 
-    def create_address(self, user_id: str, address: Address):
+    def create_address(self, user_id: str, address: CreateAddress):
         user = self.user_repository.get_user_by_id(user_id)
         if not user:
             raise HTTPException(
