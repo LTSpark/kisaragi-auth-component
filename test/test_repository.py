@@ -16,7 +16,7 @@ class RepositoryUnitTest(unittest.TestCase):
     def test_01_create_user(self):
         user = CreateUser(
             user_name="mock_user",
-            email="mock_user@test.com",
+            email="mock_user123@test.com",
             password="Test12345",
             telephone_number="123456789",
             birth_date=datetime.date.today(),
@@ -37,8 +37,8 @@ class RepositoryUnitTest(unittest.TestCase):
         self.assertEqual(user["user_name"], "mock_user")
 
     def test_04_get_user_by_email(self):
-        user = self.user_repository.get_user_by_email("mock_user@test.com").to_dict()
-        self.assertEqual(user["email"], "mock_user@test.com")
+        user = self.user_repository.get_user_by_email("mock_user123@test.com").to_dict()
+        self.assertEqual(user["email"], "mock_user123@test.com")
 
     def test_05_add_address(self):
         user_id = self.__class__.user_id

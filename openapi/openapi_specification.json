@@ -18,7 +18,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+
+                }
               }
             }
           }
@@ -223,7 +225,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+
+                }
               }
             }
           },
@@ -245,8 +249,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get Users By Name",
-        "operationId": "get_users_by_name_api_v1_users__user_name__name_get",
+        "summary": "Get User By Name",
+        "operationId": "get_user_by_name_api_v1_users__user_name__name_get",
         "parameters": [
           {
             "required": true,
@@ -264,11 +268,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Get Users By Name Api V1 Users  User Name  Name Get",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -326,10 +326,280 @@
           }
         }
       }
+    },
+    "/api/v1/payment_information/{user_id}": {
+      "post": {
+        "tags": [
+          "Payment Information"
+        ],
+        "summary": "Create Payment Information",
+        "operationId": "create_payment_information_api_v1_payment_information__user_id__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "User Id",
+              "type": "string"
+            },
+            "name": "user_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentInformation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment_information/{user_id}/id/{payment_information_id}": {
+      "delete": {
+        "tags": [
+          "Payment Information"
+        ],
+        "summary": "Create Payment Information",
+        "operationId": "create_payment_information_api_v1_payment_information__user_id__id__payment_information_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "User Id",
+              "type": "string"
+            },
+            "name": "user_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Payment Information Id",
+              "type": "string"
+            },
+            "name": "payment_information_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/address/{user_id}": {
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Create Address",
+        "operationId": "create_address_api_v1_address__user_id__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "User Id",
+              "type": "string"
+            },
+            "name": "user_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/address/{user_id}/id/{address_id}": {
+      "delete": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Create Address",
+        "operationId": "create_address_api_v1_address__user_id__id__address_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "User Id",
+              "type": "string"
+            },
+            "name": "user_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Address Id",
+              "type": "string"
+            },
+            "name": "address_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Metrics",
+        "description": "Endpoint that serves Prometheus metrics.",
+        "operationId": "metrics_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Address": {
+        "title": "Address",
+        "required": [
+          "address_id",
+          "address",
+          "district",
+          "city",
+          "zipcode",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "address_id": {
+            "title": "Address Id",
+            "type": "string"
+          },
+          "address": {
+            "title": "Address",
+            "type": "string"
+          },
+          "district": {
+            "title": "District",
+            "type": "string"
+          },
+          "city": {
+            "title": "City",
+            "type": "string"
+          },
+          "zipcode": {
+            "title": "Zipcode",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "Body_update_user_api_v1_users__user_id__put": {
         "title": "Body_update_user_api_v1_users__user_id__put",
         "required": [
@@ -353,6 +623,58 @@
             "title": "File",
             "type": "string",
             "format": "binary"
+          }
+        }
+      },
+      "CreateAddress": {
+        "title": "CreateAddress",
+        "required": [
+          "address",
+          "district",
+          "city",
+          "zipcode"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "title": "Address",
+            "type": "string"
+          },
+          "district": {
+            "title": "District",
+            "type": "string"
+          },
+          "city": {
+            "title": "City",
+            "type": "string"
+          },
+          "zipcode": {
+            "title": "Zipcode",
+            "type": "string"
+          }
+        }
+      },
+      "CreatePaymentInformation": {
+        "title": "CreatePaymentInformation",
+        "required": [
+          "primary_account_number",
+          "cardholder_name",
+          "expiration_date"
+        ],
+        "type": "object",
+        "properties": {
+          "primary_account_number": {
+            "title": "Primary Account Number",
+            "type": "string"
+          },
+          "cardholder_name": {
+            "title": "Cardholder Name",
+            "type": "string"
+          },
+          "expiration_date": {
+            "title": "Expiration Date",
+            "type": "string",
+            "format": "date"
           }
         }
       },
@@ -547,6 +869,13 @@
               "$ref": "#/components/schemas/PaymentInformation"
             }
           },
+          "addresses": {
+            "title": "Addresses",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
           "created_at": {
             "title": "Created At",
             "type": "string",
@@ -610,6 +939,10 @@
     {
       "name": "Health",
       "description": "Service to check health of Kisaragi Auth service"
+    },
+    {
+      "name": "Address",
+      "description": "Manage Users Address database operations"
     }
   ]
 }
