@@ -1,8 +1,5 @@
 from fastapi import APIRouter
 
-
-load_dotenv()
-
 health_router = APIRouter()
 
 
