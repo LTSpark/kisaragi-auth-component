@@ -75,23 +75,6 @@ def test_get_user_by_id():
     assert response.status_code == 200
     assert "user_id" in response.json()
 
-def test_delete_user():
-
-    email = "mock.user@gmail.com"
-    user_data = client.get(
-        f"/api/v1/users/{email}/email"
-    )
-    user_data = user_data.json()
-    print(f"type: {type(user_data)}")
-    print(f"user_data: {user_data}")
-    user_id = user_data['user_id']
-
-    response = client.delete(
-        f"/api/v1/users/{user_id}/id",
-    )
-    assert response.status_code == 200
-    assert response.json() == {"msg": "User deleted successfully"}
-
 # HEALTH CONTROLLER
 def test_create_user_health():
     response = client.get(
@@ -129,3 +112,18 @@ def test_login_user_fail2():
         "/api/v1/auth"
     )
     assert response.status_code == 422
+
+def test_delete_user():
+
+    email = "mock.user@gmail.com"
+    user_data = client.get(
+        f"/api/v1/users/{email}/email"
+    )
+    user_data = user_data.json()
+    user_id = user_data['user_id']
+
+    response = client.delete(
+        f"/api/v1/users/{user_id}/id",
+    )
+    assert response.status_code == 200
+    assert response.json() == {"msg": "User deleted successfully"}

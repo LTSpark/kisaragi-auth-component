@@ -1,1 +1,3 @@
 from .user_repository import UserRepository
+from .address_repository import AddressRepository
+from .payment_information_repository import PaymentInformationRepository

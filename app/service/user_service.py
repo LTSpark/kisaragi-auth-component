@@ -58,7 +58,13 @@ class UserService:
         return user.to_dict()
 
     def get_user_by_name(self, user_name):
-        return self.user_repository.get_users_by_name(user_name)
+        user = self.user_repository.get_user_by_name(user_name)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"User with name {user_name} not found"
+            )
+        return user.to_dict()
 
     def update(self, user_id, name, surname, file, password):
 
@@ -94,7 +100,6 @@ class UserService:
             )
 
     def delete(self, user_id):
-
         user = self.user_repository.get_user_by_id(user_id)
         if not user:
             raise HTTPException(

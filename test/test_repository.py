@@ -4,8 +4,6 @@ import unittest
 from app.repository import UserRepository
 from app.schemas import CreateUser
 
-unittest.TestLoader.sortTestMethodsUsing = None
-
 
 class RepositoryUnitTest(unittest.TestCase):
 
@@ -32,7 +30,7 @@ class RepositoryUnitTest(unittest.TestCase):
         self.assertEqual(user['user_id'], user_id)
 
     def test_03_get_user_by_name(self):
-        user = self.user_repository.get_users_by_name("mock_user")[0]
+        user = self.user_repository.get_user_by_name("mock_user")
         self.assertEqual(user["user_name"], "mock_user")
 
     def test_04_get_user_by_email(self):

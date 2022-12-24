@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from dotenv import load_dotenv
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from .internal import DatabaseConfig
-from .controllers import user_router, health_router, auth_router
+from .controllers import user_router, health_router, auth_router, payment_information_router, address_router
 
 load_dotenv()
 
@@ -27,6 +28,10 @@ tags_metadata = [
     {
         "name": "Health",
         "description": "Service to check health of Kisaragi Auth service"
+    },
+    {
+        "name": "Address",
+        "description": "Manage Users Address database operations"
     }
 ]
 
@@ -49,3 +54,7 @@ app.add_middleware(
 app.include_router(health_router, tags=["Health"])
 app.include_router(user_router, tags=["Users"])
 app.include_router(auth_router, tags=["Authentication"])
+app.include_router(payment_information_router, tags=["Payment Information"])
+app.include_router(address_router, tags=["Address"])
+
+Instrumentator().instrument(app).expose(app)
