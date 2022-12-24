@@ -5,6 +5,7 @@ env:
   ALGORITHM: HS256
   MONGODB_URI: mongodb+srv://Admin:8MrBpwzzaP5mTlD4@cluster0.lahb0.mongodb.net/kisaragi-auth?retryWrites=true&w=majority
   SECRET_KEY: 21429ad6d71399e617f7f4d5e6f53454
+  CODECOV_TOKEN: 87d7f11b-8c6d-49b4-8195-31322ce8c52f
 jobs:
   build:
 
@@ -30,3 +31,11 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+
+      - name: Upload coverage reports to Codecov
+        run: |
+          # Replace `linux` below with the appropriate OS
+          # Options are `alpine`, `linux`, `macos`, `windows`
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
