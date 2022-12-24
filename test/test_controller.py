@@ -60,7 +60,7 @@ def test_get_user_by_email():
 
 
 def test_get_user_by_email_fail():
-    email = "arian@gmail.com"
+    email = "test_non_existent@gmail.com"
     response = client.get(
         f"/api/v1/users/{email}/email"
     )
