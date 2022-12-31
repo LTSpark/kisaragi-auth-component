@@ -36,7 +36,7 @@ tags_metadata = [
 ]
 
 app = FastAPI(
-    title="Kisaragi Authentication Component",
+    title="Kisaragi Auth Component",
     version="0.0.5",
     description="REST API for managing users authorization and personal information.",
     docs_url="/api/v1/documentation",
